@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Page title -->
+    <title>PAPPCORN | TEST</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="vendor/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="vendor/sweetalert/lib/sweet-alert.css" />
+    
+    <link rel="stylesheet" href="vendor/fooTable/css/footable.core.min.css" />
+    <link rel="stylesheet" href="vendor/selectpicker/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css" />
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/helper.css" />
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body class="boxed hide-sidebar">
+
+<!-- Simple splash screen-->
+<div class="splash"> 
+    <div class="color-line"></div><div class="splash-title"><h1>PAPPCORN</h1><p>© 2017 - Jhonathan Espinosa - Prueba PappCorn 2017. </p><div class="spinner">  <div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div> </div> </div> 
+    </div>
+<!--[if lt IE 7]>
+<p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+    <div class="boxed-wrapper">
+<!-- Header -->
+    <div id="header">
+        
+        <div id="logo" class="light-version">
+            <span>
+                Prueba PappCorn
+            </span>
+        </div>
+        <nav role="navigation">
+            <div class="mobile-menu">
+                <button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
+                    <i class="fa fa-chevron-down"></i>
+                </button>
+                <div class="collapse mobile-navbar" id="mobile-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="lnkCerrarSesion">
+                            <a class="" href="index.html">Salir</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav no-borders">
+                    <li class="dropdown lnkCerrarSesion">
+                        <a href="login.html">
+                            <i class="pe-7s-upload pe-rotate-90"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Navigation -->
+
+
+    <!-- Main Wrapper -->
+    <div id="wrapper">
+
+    <div class="content animate-panel">
+    <h2 id="lblHome_Bienvenido">Bienvenido: <span id="lblHome_NomUsuario"></span></h2>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <input type="text" class="form-control input-sm m-b-md" id="filter" placeholder="Filtrar la Tabla">
+                        <table id="tblHome_Tabla1" class="footable table" data-page-size="8" data-filter=#filter>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>País</th>
+                                    <th>Nombre</th>
+                                    <th>Deportes</th>
+                                    <th>Edad</th>
+                                    <th>Borrar</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>540948</td>
+                                    <td idPais="2">COL</td>
+                                    <td>Jotachivo</td>
+                                    <td idDeportes="1,2">Todos</td>
+                                    <td Fecha="1990-02-09">27</td>
+                                    <td>
+                                        <button class="btn btn-xs btn-danger btn-circle btnHome_Tabla1_Borrar" type="button"></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-xs btn-success btn-circle btnHome_Tabla1_Editar" type="button"></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Footer-->
+        <footer class="footer">
+            <a id="btnHome_AddUser" class="btn btn-warning btn-circle btn-lg pull-right" type="button">
+                <i class="fa fa-user-plus"></i>
+            </a>
+            <span class="text-white pull-right">Agregar Usuario</span>
+            <div class="bottom">
+                <i class="fa fa-check-circle btn-outline btn-success"></i>
+                <span class="text-white"> © 2017 - Jhonathan Espinosa - Prueba PappCorn 2017</span>            
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+<div class="modal fade hmodal-warning" id="cntHome_Crear" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title"><span id="lblHome_Crear_Titulo">Agregar</span> Usuario</h4>
+            </div>
+            <form id="frmHome_Crear" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="col-md-12 row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="col-sm-12">País</label>
+                                <div class="col-xs-2">
+                                    <img id="imgHome_Crear_Pais" src="images/flags/1.png">
+                                </div>
+                                <div class="col-xs-10">
+                                    <select id="txtHome_Crear_Pais" class="form-control guardar" style="width: 100%">
+                                        <option value="1">Colombia</option>
+                                        <option value="2">Chile</option>
+                                        <option value="3">Mexico</option>
+                                        <option value="4">Perú</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="col-sm-12">ID</label>
+                                <div class="col-sm-10">
+                                    <input id="txtHome_Crear_id" type="text" class="form-control guardar" disabled value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="col-sm-12">Deportes <!--<small>(Separados por coma)</small>--></label>
+                                <div class="col-sm-10">
+                                    <select id="txtHome_Crear_Deportes" class="selectpicker" multiple>
+                                        <option value="1">Fútbol</option>
+                                        <option value="2">Tenis</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <button id="btnHome_Crear_AgregarDeporte" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Agregar Deporte</button>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="col-sm-12">Fecha de Nacimiento</label>
+                                <div class="col-sm-10">
+                                    <div id="cntHome_Crear_Fecha"></div>
+                                    <input id="txtHome_Crear_Fecha" type="hidden" class="form-control guardar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12">Nombre</label>
+                        <div class="col-sm-10">
+                            <input id="txtHome_Crear_Nombre" type="text" class="form-control guardar">
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade hmodal-info" id="cntHome_Crear_AgregarDeporte" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title">Agregar Deporte</h4>
+            </div>
+            <form id="frmHome_CrearDeporte" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-12">Nombre</label>
+                        <div class="col-sm-10">
+                            <input id="txtHome_CrearDeporte_Nombre" type="text" class="form-control guardar" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-info">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Vendor scripts -->
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="vendor/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendor/metisMenu/dist/metisMenu.min.js"></script>
+<script src="vendor/iCheck/icheck.min.js"></script>
+<script src="vendor/sparkline/index.js"></script>
+<script src="vendor/sweetalert/lib/sweet-alert.min.js"></script>
+
+<script src="vendor/fooTable/dist/footable.all.min.js"></script>
+<script src="vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="vendor/selectpicker/bootstrap-select.min.js"></script>
+<script src="vendor/selectpicker/defaults-es_ES.min.js"></script>
+
+
+<!-- App scripts -->
+<script src="scripts/homer.js"></script>
+
+<script src="js/funciones.js"></script>
+<script src="js/home.js"></script>
+
+</body>
+</html>
