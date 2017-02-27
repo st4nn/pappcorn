@@ -114,8 +114,53 @@ var crearUsuario = function(datos, callback)
         swal("Error!", data.error, "error");
       } else
       {
+        callback(data.datos);
+      }
+    }, 'json');
+  }
+}
+
+var borrarUsuario = function(idUsuario, callback)
+{
+  if (callback === undefined)
+  {     callback = function(){};    }
+
+  idUsuario = idUsuario || "";
+  if (idUsuario == "")
+  {
+    return false;
+  } else
+  {
+    $.post('server/php/usuarios.php', {param: 'borrar', datos : {id : idUsuario}}, function(data, textStatus, xhr) 
+    {
+      if (data.error != "")
+      {
+        swal("Error!", data.error, "error");
+      } else
+      {
         callback(data.id);
       }
     }, 'json');
   }
+}
+
+var cargarUsuarios = function(callback)
+{
+  if (callback === undefined)
+  {     callback = function(){};    }
+
+    $.post('server/php/usuarios.php', {param: 'cargar', datos : {}}, function(data, textStatus, xhr) 
+    {
+      if (data.error != undefined)
+      {
+        swal("Error!", data.error, "error");
+      } else
+      {
+        if (data != 0)
+        {
+          callback(data);
+        }
+      }
+    }, 'json');
+  
 }

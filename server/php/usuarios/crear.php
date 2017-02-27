@@ -3,7 +3,10 @@
    
    foreach ($datos as $key => $value) 
    {
-      $datos->$key = addslashes($value);
+      if (!is_array($value))
+      {
+         $datos->$key = addslashes($value);
+      }
    }
 
    $Respuesta = array();
@@ -22,31 +25,6 @@
 
    $link->query(utf8_decode($sql));
 
-   $sql "DELETE FROM Usuarios_has_Deportes WHERE idLogin = '" . $datos->id - "';";
-   $link->query(utf8_decode($sql));
-
-   if ($datos->Deportes <> "")
-   {
-      if ($datos->id == "null")
-      {
-         $datos->id = $link->insert_id;
-      }
-      
-      $arrDeportes = explode($datos->Deportes, ",");
-      $values = "";
-
-      foreach ($arrDeportes as $key => $value) 
-      {
-         $values .= "(" . $datos->id . ", " . $value . "), ";
-      }
-      $values = substr($values, 0, -2);
-
-      if ($values <> "")
-      {
-         $link->query(utf8_decode($sql));
-      }
-   }
-
    if ( $link->error <> "")
    {
       $Respuesta['Error'] .= "\n Hubo un error desconocido " . $link->error;
@@ -55,6 +33,33 @@
       $nuevoId = $link->insert_id;
       $Respuesta['datos'] = $nuevoId;
    }
+
+   $sql = "DELETE FROM Usuarios_has_Deportes WHERE idLogin = '" . $datos->id - "';";
+   $link->query(utf8_decode($sql));
+
+   if ($datos->Deportes <> "")
+   {
+      if ($datos->id == "null")
+      {
+         $datos->id = $nuevoId;
+      }
+
+      $values = "";
+
+      foreach ($datos->Deportes as $key => $value) 
+      {
+         $values .= "(" . $datos->id . ", " . $value . "), ";
+      }
+      $values = substr($values, 0, -2);
+
+      
+      if ($values <> "")
+      {
+         $sql = "INSERT INTO Usuarios_has_Deportes (idLogin, idDeporte) VALUES " . $values . ";";
+         $link->query(utf8_decode($sql));
+      }
+   }
+
 
    echo json_encode($Respuesta);
    

@@ -2,13 +2,41 @@ function funcion_Inicio()
 {
     $('#tblHome_Tabla1').footable();
 
+
+    cargarUsuarios(function(Usuarios)
+	{
+    	$('#tblHome_Tabla1 tbody tr').remove();
+    	if (Usuarios.length > 0)
+    	{
+		 	var tds = "";
+			$.each(Usuarios, function(index, val) 
+			{
+				tds += '<tr>';
+	                tds += '<td>' + val.id + '</td>';
+	                tds += '<td idPais="' + val.Pais + '"><img src="images/flags/' + val.idPais + '.png">' + val.Pais + '</td>';
+	                tds += '<td>' + val.Nombre + '</td>';
+	                tds += '<td idDeportes="' + val.idDeportes + '">' + val.Deportes + '</td>';
+	                tds += '<td Fecha="' + val.Fecha + '">' + parseInt(val.Edad) + '</td>';
+	                tds += '<td>';
+	                    tds += '<button class="btn btn-xs btn-danger btn-circle btnHome_Tabla1_Borrar" type="button"></button>';
+	                tds += '</td>';
+	                tds += '<td>';
+	                    tds += '<button class="btn btn-xs btn-success btn-circle btnHome_Tabla1_Editar" type="button"></button>';
+	                tds += '</td>'
+	            tds += '</tr>';
+			});
+    		
+        	$("#tblHome_Tabla1 tbody").append(tds);
+    	}
+	});
+
     $("#btnHome_AddUser").click(function(event) 
     {
         event.preventDefault();
         $("#cntHome_Crear").modal("show");
         $("#lblHome_Crear_Titulo").text("Agregar");
         $("#frmHome_Crear")[0].reset();
-        $("#txtHome_Crear_id").val("null");
+        $("#txtHome_Crear_id").val("");
         $('#txtHome_Crear_Deportes').selectpicker("refresh");
         $("#txtHome_Crear_Pais").trigger('change');
 
@@ -91,6 +119,7 @@ function funcion_Inicio()
 
     $(document).delegate('.btnHome_Tabla1_Borrar', 'click', function(event) 
     {
+    	var obj = this;
         swal({
                 title: "¿Estas seguro?",
                 text: "No podrás recuperar éste registro despues!",
@@ -104,6 +133,12 @@ function funcion_Inicio()
             function (isConfirm) {
                 if (isConfirm) 
                 {
+                    var objFila = $(obj).parent("td").parent("tr").find("td");
+                    borrarUsuario($(objFila[0]).text(), function()
+                	{
+                		console.log(obj);
+                		$(obj).parent("td").parent("tr").remove();
+                	});
                     swal("Borrado!", "El registro ha sido borrado.", "success");
                 } 
             });
@@ -112,11 +147,31 @@ function funcion_Inicio()
     $("#frmHome_Crear").on("submit", function(evento)
     {
         evento.preventDefault();
+        if ($("#txtHome_Crear_id").val() == "")
+        {
+        	$("#txtHome_Crear_id").val("null");	
+        }
+
         $("#frmHome_Crear").generarDatosEnvio("txtHome_Crear_", function(datos)
         {
-            crearUsuario(datos, function()
+            crearUsuario(datos, function(nuevoId)
             {
-                
+            	$("#txtHome_Crear_id").val(nuevoId);
+
+                var tds = "<tr>";
+                tds += '<td>' + nuevoId + '</td>';
+                tds += '<td idPais="' + datos.Pais + '"><img src="images/flags/' + datos.Pais + '.png">' + $("#txtHome_Crear_Pais option:selected").text() + '</td>';
+                tds += '<td>' + datos.Nombre + '</td>';
+                tds += '<td idDeportes="' + datos.Deportes + '"></td>';
+                tds += '<td Fecha="' + datos.Fecha + '">27</td>';
+                tds += '<td>';
+                    tds += '<button class="btn btn-xs btn-danger btn-circle btnHome_Tabla1_Borrar" type="button"></button>';
+                tds += '</td>';
+                tds += '<td>';
+                    tds += '<button class="btn btn-xs btn-success btn-circle btnHome_Tabla1_Editar" type="button"></button>';
+                tds += '</td></tr>';
+                $("#tblHome_Tabla1 tbody").append(tds);
+                $("#cntHome_Crear").modal("hide");
             });
         });
     });

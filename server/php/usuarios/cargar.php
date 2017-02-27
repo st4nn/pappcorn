@@ -1,19 +1,17 @@
 <?php
-   include("../conectar.php"); 
-   $link = Conectar();
-
-   $idUsuario = addslashes($_POST['Usuario']);
-      
    $sql = "SELECT
                Usuarios.*,
-               GROUP_CONCAT(DISTINCT Deportes.id  SEPARATOR ','), AS idDeportes,
-               GROUP_CONCAT(DISTINCT Deportes.Nombre  SEPARATOR ', '), AS Deportes,
+               GROUP_CONCAT(DISTINCT Deportes.id  SEPARATOR ',') AS idDeportes,
+               GROUP_CONCAT(DISTINCT Deportes.Nombre  SEPARATOR ', ') AS Deportes,
+               (DATEDIFF( NOW( ) , fechaNacimiento ) /360) AS Edad,
                Paises.Nombre AS Pais
             FROM 
                Usuarios
                 LEFT JOIN Usuarios_has_Deportes ON Usuarios_has_Deportes.idLogin = Usuarios.id
                 LEFT JOIN Deportes ON Deportes.id = Usuarios_has_Deportes.idDeporte
-                LEFT JOIN Paises ON Paises.id = Usuarios.idPais;";
+                LEFT JOIN Paises ON Paises.id = Usuarios.idPais
+            GROUP BY
+               Usuarios.id;";
 
    $result = $link->query($sql);
 
