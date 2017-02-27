@@ -2,33 +2,7 @@ function funcion_Inicio()
 {
     $('#tblHome_Tabla1').footable();
 
-
-    cargarUsuarios(function(Usuarios)
-	{
-    	$('#tblHome_Tabla1 tbody tr').remove();
-    	if (Usuarios.length > 0)
-    	{
-		 	var tds = "";
-			$.each(Usuarios, function(index, val) 
-			{
-				tds += '<tr>';
-	                tds += '<td>' + val.id + '</td>';
-	                tds += '<td idPais="' + val.Pais + '"><img src="images/flags/' + val.idPais + '.png">' + val.Pais + '</td>';
-	                tds += '<td>' + val.Nombre + '</td>';
-	                tds += '<td idDeportes="' + val.idDeportes + '">' + val.Deportes + '</td>';
-	                tds += '<td Fecha="' + val.Fecha + '">' + parseInt(val.Edad) + '</td>';
-	                tds += '<td>';
-	                    tds += '<button class="btn btn-xs btn-danger btn-circle btnHome_Tabla1_Borrar" type="button"></button>';
-	                tds += '</td>';
-	                tds += '<td>';
-	                    tds += '<button class="btn btn-xs btn-success btn-circle btnHome_Tabla1_Editar" type="button"></button>';
-	                tds += '</td>'
-	            tds += '</tr>';
-			});
-    		
-        	$("#tblHome_Tabla1 tbody").append(tds);
-    	}
-	});
+    alimentarTablar1();
 
     $("#btnHome_AddUser").click(function(event) 
     {
@@ -158,21 +132,52 @@ function funcion_Inicio()
             {
             	$("#txtHome_Crear_id").val(nuevoId);
 
-                var tds = "<tr>";
+                /*var tds = "<tr>";
                 tds += '<td>' + nuevoId + '</td>';
                 tds += '<td idPais="' + datos.Pais + '"><img src="images/flags/' + datos.Pais + '.png">' + $("#txtHome_Crear_Pais option:selected").text() + '</td>';
                 tds += '<td>' + datos.Nombre + '</td>';
                 tds += '<td idDeportes="' + datos.Deportes + '"></td>';
-                tds += '<td Fecha="' + datos.Fecha + '">27</td>';
+                tds += '<td Fecha="' + datos.Fecha + '">' + calcularEdad(datos.Fecha).anios + '</td>';
                 tds += '<td>';
                     tds += '<button class="btn btn-xs btn-danger btn-circle btnHome_Tabla1_Borrar" type="button"></button>';
                 tds += '</td>';
                 tds += '<td>';
                     tds += '<button class="btn btn-xs btn-success btn-circle btnHome_Tabla1_Editar" type="button"></button>';
                 tds += '</td></tr>';
-                $("#tblHome_Tabla1 tbody").append(tds);
+                $("#tblHome_Tabla1 tbody").append(tds);*/
+                alimentarTablar1();
                 $("#cntHome_Crear").modal("hide");
             });
         });
+    });
+}
+
+function alimentarTablar1()
+{
+    cargarUsuarios(function(Usuarios)
+    {
+        $('#tblHome_Tabla1 tbody tr').remove();
+        if (Usuarios.length > 0)
+        {
+            var tds = "";
+            $.each(Usuarios, function(index, val) 
+            {
+                tds += '<tr>';
+                    tds += '<td>' + val.id + '</td>';
+                    tds += '<td idPais="' + val.idPais + '"><img src="images/flags/' + val.idPais + '.png">' + val.Pais + '</td>';
+                    tds += '<td>' + val.Nombre + '</td>';
+                    tds += '<td idDeportes="' + val.idDeportes + '">' + val.Deportes + '</td>';
+                    tds += '<td Fecha="' + val.Fecha + '">' + parseInt(val.Edad) + '</td>';
+                    tds += '<td>';
+                        tds += '<button class="btn btn-xs btn-danger btn-circle btnHome_Tabla1_Borrar" type="button"></button>';
+                    tds += '</td>';
+                    tds += '<td>';
+                        tds += '<button class="btn btn-xs btn-success btn-circle btnHome_Tabla1_Editar" type="button"></button>';
+                    tds += '</td>'
+                tds += '</tr>';
+            });
+            
+            $("#tblHome_Tabla1 tbody").append(tds);
+        }
     });
 }
