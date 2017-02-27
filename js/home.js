@@ -70,10 +70,10 @@ function funcion_Inicio()
         $("#lblHome_Crear_Titulo").text("Editar");
         
         $("#txtHome_Crear_id").val($(objFila[0]).text());
-        $("#txtHome_Crear_Pais").val($(objFila[1]).attr("idPais"));
+        $("#txtHome_Crear_Pais").val($(objFila[2]).attr("idPais"));
         $("#txtHome_Crear_Pais").trigger('change');
 
-        var idDeportes = $(objFila[3]).attr("idDeportes");
+        var idDeportes = $(objFila[4]).attr("idDeportes");
         if (idDeportes != "")
         {
             idDeportes = idDeportes.split(",");
@@ -84,10 +84,10 @@ function funcion_Inicio()
         }
         $('#txtHome_Crear_Deportes').selectpicker("refresh");
 
-        $("#txtHome_Crear_Fecha").val($(objFila[4]).attr("Fecha"));
+        $("#txtHome_Crear_Fecha").val($(objFila[5]).attr("Fecha"));
         $("#cntHome_Crear_Fecha").datepicker("update", $(objFila[4]).attr("Fecha"));
 
-        $("#txtHome_Crear_Nombre").val($(objFila[2]).text());
+        $("#txtHome_Crear_Nombre").val($(objFila[3]).text());
     });
 
 
@@ -164,7 +164,8 @@ function alimentarTablar1()
             {
                 tds += '<tr>';
                     tds += '<td>' + val.id + '</td>';
-                    tds += '<td idPais="' + val.idPais + '"><img src="images/flags/' + val.idPais + '.png">' + val.Pais + '</td>';
+                    tds += '<td><img src="images/flags/' + val.idPais + '.png"></td>';
+                    tds += '<td idPais="' + val.idPais + '">' + val.Pais + '</td>';
                     tds += '<td>' + val.Nombre + '</td>';
                     tds += '<td idDeportes="' + val.idDeportes + '">' + val.Deportes + '</td>';
                     tds += '<td Fecha="' + val.Fecha + '">' + parseInt(val.Edad) + '</td>';
